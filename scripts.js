@@ -1,18 +1,29 @@
-// Wait for the DOM to be fully loaded
-document.addEventListener('DOMContentLoaded', function() {
-    console.log("Document loaded and script running");
+// Script to handle "Back to Top" button
+var mybutton = document.getElementById("backToTop");
 
-    // Example: Adding a click event to the header to change its color
-    const header = document.querySelector('header');
-    header.addEventListener('click', function() {
-        header.style.backgroundColor = header.style.backgroundColor === 'blue' ? '#333' : 'blue';
-    });
+window.onscroll = function() {scrollFunction()};
 
-    // Example: Adding a form submission handler
-    const contactForm = document.querySelector('form');
-    contactForm.addEventListener('submit', function(event) {
-        event.preventDefault();
-        alert('Form submitted!');
+function scrollFunction() {
+    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+        mybutton.style.display = "block";
+    } else {
+        mybutton.style.display = "none";
+    }
+}
+
+function topFunction() {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+}
+
+// Adding smooth scroll effect for internal links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+            behavior: 'smooth'
+        });
     });
 });
+
 
